@@ -50,6 +50,21 @@ var token = BaseEncoding.Base64Url.Encode(tokenBytes);
 var raw = BaseEncoding.Base64Url.Decode(token);
 ```
 
+### Safe Decoding with TryDecode
+
+```csharp
+using Philiprehberger.BaseEncoding;
+
+if (BaseEncoding.Base32.TryDecode("JBSWY3DP", out var result))
+{
+    // result contains the decoded bytes
+}
+else
+{
+    // input was invalid — no exception thrown
+}
+```
+
 ### Base62 Short URLs
 
 ```csharp
@@ -70,6 +85,7 @@ var decoded = BaseEncoding.Base62.Decode(shortCode);
 | `BaseEncoding.Base64Url` | Static property returning an `IBaseEncoder` for RFC 4648 section 5 Base64URL (no padding) |
 | `IBaseEncoder.Encode(data)` | Encodes a byte array into a string |
 | `IBaseEncoder.Decode(encoded)` | Decodes a string back into a byte array |
+| `IBaseEncoder.TryDecode(encoded, out result)` | Attempts to decode without throwing; returns `false` on invalid input |
 
 ## Development
 

@@ -75,6 +75,21 @@ public sealed class Base32Encoder : IBaseEncoder
         return output[..index];
     }
 
+    /// <inheritdoc />
+    public bool TryDecode(string encoded, out byte[]? result)
+    {
+        try
+        {
+            result = Decode(encoded);
+            return true;
+        }
+        catch (FormatException)
+        {
+            result = null;
+            return false;
+        }
+    }
+
     private static int CharToValue(char c)
     {
         return c switch

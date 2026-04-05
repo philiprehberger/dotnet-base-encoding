@@ -48,4 +48,19 @@ public sealed class Base64UrlEncoder : IBaseEncoder
 
         return Convert.FromBase64String(base64);
     }
+
+    /// <inheritdoc />
+    public bool TryDecode(string encoded, out byte[]? result)
+    {
+        try
+        {
+            result = Decode(encoded);
+            return true;
+        }
+        catch (FormatException)
+        {
+            result = null;
+            return false;
+        }
+    }
 }
